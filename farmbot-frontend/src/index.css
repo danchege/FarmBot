@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-blue-50 to-white min-h-screen;
+  }
+}
+
+@layer components {
+  .glow-effect {
+    @apply shadow-lg shadow-blue-500/25;
+  }
+  
+  .chat-bubble {
+    @apply rounded-2xl p-4 max-w-xs md:max-w-md;
+  }
+  
+  .user-message {
+    @apply bg-gradient-to-r from-blue-500 to-purple-500 text-white ml-auto shadow-lg shadow-blue-500/30;
+  }
+  
+  .ai-message {
+    @apply bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200/50 shadow-lg shadow-gray-500/10;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 glow-effect;
+  }
+  
+  .card {
+    @apply bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-200/50;
+  }
+  
+  /* Modern input animations */
+  .modern-input {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .modern-input:focus {
+    @apply transform scale-[1.02];
+  }
+  
+  /* Smooth scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(59, 130, 246, 0.3) transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.5);
+  }
+} 
