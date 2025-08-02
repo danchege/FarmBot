@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm install && pnpm run build",
-  "outputDirectory": "build",
+  "buildCommand": "cd farmbot-frontend && pnpm install && pnpm run build",
+  "outputDirectory": "farmbot-frontend/build",
   "framework": "create-react-app",
   "rewrites": [
     {
