@@ -1,22 +1,5 @@
 {
-  "buildCommand": "cd farmbot-frontend && pnpm install && pnpm run build",
+  "buildCommand": "cd farmbot-frontend && npm install && npm run build",
   "outputDirectory": "farmbot-frontend/build",
-  "framework": "create-react-app",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/static/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
+  "framework": "create-react-app"
 } 
