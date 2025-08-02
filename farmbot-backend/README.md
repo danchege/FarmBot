@@ -80,7 +80,7 @@ Get chat history for a specific session.
 ### GET /health
 Health check endpoint.
 
-## Database Schema
+## Database Schema.
 
 ### Message Model
 ```javascript

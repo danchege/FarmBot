@@ -204,4 +204,4 @@ For support, please open an issue on GitHub or contact the development team.
 
 ---
 
-**FarmBot** - Making farming smarter with AI 🌱 
+**FarmBot** - Making farming smarter with AI 🌱 .

@@ -63,12 +63,12 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-600 hover:text-blue-600 text-sm transition-colors">
+            <button className="text-gray-600 hover:text-blue-600 text-sm transition-colors bg-transparent border-none cursor-pointer">
               Privacy Policy
-            </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 text-sm transition-colors">
+            </button>
+            <button className="text-gray-600 hover:text-blue-600 text-sm transition-colors bg-transparent border-none cursor-pointer">
               Terms of Service
-            </a>
+            </button>
           </div>
         </div>
       </div>

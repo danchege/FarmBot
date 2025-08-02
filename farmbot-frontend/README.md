@@ -19,7 +19,7 @@ Modern React frontend for FarmBot - AI-powered farming assistant.
 
 ## Components
 
-- `Navbar` - Responsive navigation with mobile menu
+- `Navbar` - Responsive navigation with mobile menu.
 - `ChatBox` - Main chat interface with message history
 - `MessageCard` - Individual message display component
 - `Footer` - Site footer with links and information
