@@ -1,0 +1,23 @@
+{
+  "name": "farmbot",
+  "version": "1.0.0",
+  "description": "FarmBot - AI-powered farming assistant",
+  "private": true,
+  "workspaces": [
+    "farmbot-frontend",
+    "farmbot-backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"cd farmbot-backend && pnpm dev\" \"cd farmbot-frontend && pnpm start\"",
+    "build": "cd farmbot-frontend && pnpm run build",
+    "start": "cd farmbot-backend && pnpm start",
+    "install:all": "pnpm install && cd farmbot-frontend && pnpm install && cd ../farmbot-backend && pnpm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+} 

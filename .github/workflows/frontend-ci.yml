@@ -26,8 +26,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: farmbot-frontend/package-lock.json
+        cache: 'pnpm'
+        cache-dependency-path: farmbot-frontend/pnpm-lock.yaml
     
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
@@ -62,7 +62,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-files
+        name: build-files-${{ matrix.node-version }}-${{ github.run_id }}
         path: farmbot-frontend/build/
         retention-days: 1
 
@@ -79,8 +79,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-        cache: 'npm'
-        cache-dependency-path: farmbot-frontend/package-lock.json
+        cache: 'pnpm'
+        cache-dependency-path: farmbot-frontend/pnpm-lock.yaml
     
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
@@ -120,8 +120,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-        cache: 'npm'
-        cache-dependency-path: farmbot-frontend/package-lock.json
+        cache: 'pnpm'
+        cache-dependency-path: farmbot-frontend/pnpm-lock.yaml
     
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
