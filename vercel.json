@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd farmbot-frontend && npm install && npm run build",
+  "buildCommand": "cd farmbot-frontend && pnpm install && pnpm run build",
   "outputDirectory": "farmbot-frontend/build",
   "framework": "create-react-app"
 } 
