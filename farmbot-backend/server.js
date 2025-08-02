@@ -30,7 +30,7 @@ app.use(limiter);
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-frontend-domain.vercel.app'] 
+    ? ['https://farmbot-frontend.vercel.app', 'https://farmbot-ai.vercel.app'] 
     : ['http://localhost:3000'],
   credentials: true
 }));
@@ -49,6 +49,24 @@ app.get('/health', (req, res) => {
     message: 'FarmBot API is running',
     timestamp: new Date().toISOString()
   });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'FarmBot API is running',
+    endpoints: {
+      health: '/health',
+      chat: '/api/chat'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Favicon endpoint
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end(); // No content
 });
 
 // Error handling middleware

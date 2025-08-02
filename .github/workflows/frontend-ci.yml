@@ -1,0 +1,165 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'farmbot-frontend/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'farmbot-frontend/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: farmbot-frontend/package-lock.json
+    
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
+    
+    - name: Install dependencies
+      run: |
+        cd farmbot-frontend
+        pnpm install --frozen-lockfile
+    
+    - name: Run linting
+      run: |
+        cd farmbot-frontend
+        pnpm run lint || echo "No lint script found"
+    
+    - name: Run tests
+      run: |
+        cd farmbot-frontend
+        pnpm test --watchAll=false --coverage --passWithNoTests
+    
+    - name: Security audit
+      run: |
+        cd farmbot-frontend
+        pnpm audit --audit-level moderate || true
+    
+    - name: Build check
+      run: |
+        cd farmbot-frontend
+        pnpm run build
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: farmbot-frontend/build/
+        retention-days: 1
+
+  deploy-preview:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: farmbot-frontend/package-lock.json
+    
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
+    
+    - name: Install dependencies
+      run: |
+        cd farmbot-frontend
+        pnpm install --frozen-lockfile
+    
+    - name: Build for preview
+      run: |
+        cd farmbot-frontend
+        pnpm run build
+    
+    - name: Deploy to Vercel (Preview)
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        working-directory: ./farmbot-frontend
+        vercel-args: '--prod'
+
+  deploy-production:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        cache-dependency-path: farmbot-frontend/package-lock.json
+    
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
+    
+    - name: Install dependencies
+      run: |
+        cd farmbot-frontend
+        pnpm install --frozen-lockfile
+    
+    - name: Build for production
+      run: |
+        cd farmbot-frontend
+        pnpm run build
+    
+    - name: Deploy to Vercel (Production)
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        working-directory: ./farmbot-frontend
+        vercel-args: '--prod'
+
+  lighthouse:
+    needs: deploy-production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        urls: |
+          ${{ secrets.FRONTEND_URL }}
+        uploadArtifacts: true
+        temporaryPublicStorage: true 
