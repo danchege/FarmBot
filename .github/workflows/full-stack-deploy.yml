@@ -91,10 +91,11 @@ jobs:
         pnpm run build
     
     - name: Deploy Frontend to Vercel
-      working-directory: farmbot-frontend
       run: |
-        npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
+        chmod +x deploy-vercel.sh
+        ./deploy-vercel.sh
       env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
