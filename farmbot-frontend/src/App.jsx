@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Chat from './pages/Chat';
-import './App.css';
 
 // Trigger workflow test - 2024-08-04
 function App() {

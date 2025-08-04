@@ -2,6 +2,12 @@
 
 AI-powered farming assistant that helps farmers decide what and when to plant using artificial intelligence.
 
+## 🌐 Live Demo
+
+**[🌱 Try FarmBot Live](https://farm-bot.vercel.app/)**
+
+Experience the AI-powered farming assistant in action!
+
 ## 🚀 Features
 
 - **AI-Powered Advice** - Get intelligent recommendations for crop selection and farming practices
