@@ -3,19 +3,21 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Chat from './pages/Chat';
 import About from './pages/About';
+import Chat from './pages/Chat';
+import './App.css';
 
+// Trigger workflow test - 2024-08-04
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="App">
         <Navbar />
-        <main className="flex-grow">
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/chat" element={<Chat />} />
             <Route path="/about" element={<About />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
         </main>
         <Footer />
