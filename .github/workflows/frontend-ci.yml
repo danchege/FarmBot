@@ -154,6 +154,6 @@ jobs:
       uses: treosh/lighthouse-ci-action@v10
       with:
         urls: |
-          ${{ secrets.FRONTEND_URL }}
+          https://farm-bot.vercel.app
         uploadArtifacts: true
         temporaryPublicStorage: true 
