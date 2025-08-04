@@ -29,15 +29,21 @@ app.use(limiter);
 
 // CORS configuration - Updated for farm-bot.vercel.app
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://farm-bot.vercel.app', 'https://farmbot-frontend.vercel.app', 'https://farmbot-ai.vercel.app'] 
-    : ['http://localhost:3000'],
-  credentials: true
+  origin: true, // Allow all origins temporarily for debugging
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+
+// Debug middleware to log requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 // Routes
 app.use('/api', chatRoutes);
