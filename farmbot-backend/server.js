@@ -27,7 +27,7 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS configuration
+// CORS configuration - Updated for farm-bot.vercel.app
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? ['https://farm-bot.vercel.app', 'https://farmbot-frontend.vercel.app', 'https://farmbot-ai.vercel.app'] 
