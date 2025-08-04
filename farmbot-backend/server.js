@@ -30,7 +30,7 @@ app.use(limiter);
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://farmbot-frontend.vercel.app', 'https://farmbot-ai.vercel.app'] 
+    ? ['https://farm-bot.vercel.app', 'https://farmbot-frontend.vercel.app', 'https://farmbot-ai.vercel.app'] 
     : ['http://localhost:3000'],
   credentials: true
 }));
