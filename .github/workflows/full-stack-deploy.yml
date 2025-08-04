@@ -91,9 +91,8 @@ jobs:
         pnpm run build
     
     - name: Deploy Frontend to Vercel
-      working-directory: farmbot-frontend
       run: |
-        npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
+        npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes --cwd farmbot-frontend
       env:
         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
